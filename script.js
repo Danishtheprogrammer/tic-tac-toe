@@ -2,9 +2,17 @@ const cells = document.querySelectorAll(".cell");
 const statusText = document.querySelector("#statusText");
 const restartBtn = document.querySelector("#restartBtn");
 
+// New variables to grab the score elements
+const scoreXText = document.querySelector("#scoreX");
+const scoreOText = document.querySelector("#scoreO");
+
 let board = ["", "", "", "", "", "", "", "", ""];
 let currentPlayer = "X";
 let isGameActive = true;
+
+// New variables to keep track of points
+let scoreX = 0;
+let scoreO = 0;
 
 const winConditions = [
     [0, 1, 2], [3, 4, 5], [6, 7, 8],
@@ -48,6 +56,15 @@ function checkWinner() {
     if (roundWon) {
         statusText.textContent = `Player ${currentPlayer} wins!`;
         isGameActive = false;
+        
+        // NEW CODE: Add a point to the winner's score
+        if (currentPlayer === "X") {
+            scoreX++;
+            scoreXText.textContent = scoreX;
+        } else {
+            scoreO++;
+            scoreOText.textContent = scoreO;
+        }
         return;
     }
 

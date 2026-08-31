@@ -10,6 +10,26 @@ body {
 .container {
     text-align: center;
 }
+
+/* NEW SCOREBOARD STYLES */
+#scoreBoard {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.score-box {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+}
+
+#statusText {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 #gameBoard {
     display: grid;
     grid-template-columns: repeat(3, 100px);
