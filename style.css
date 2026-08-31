@@ -1,66 +1,105 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Orbitron', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: #f4f4f9;
+    background-color: #0b0c10; /* Dark background */
+    color: #66fcf1; /* Neon cyan text */
 }
+
 .container {
     text-align: center;
 }
 
-/* NEW SCOREBOARD STYLES */
+h1.glow {
+    text-shadow: 0 0 10px #66fcf1, 0 0 20px #66fcf1;
+    letter-spacing: 2px;
+}
+
 #scoreBoard {
     display: flex;
     justify-content: space-evenly;
-    margin-bottom: 10px;
-    font-size: 20px;
-    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 16px;
+    letter-spacing: 1px;
 }
+
 .score-box {
-    background-color: #333;
-    color: white;
+    background-color: #1f2833;
+    color: #c5c6c7;
     padding: 10px 20px;
-    border-radius: 8px;
+    border: 1px solid #45a29e;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(69, 162, 158, 0.5);
+}
+
+.score-num {
+    font-size: 24px;
+    font-weight: bold;
+    color: #66fcf1;
 }
 
 #statusText {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    font-weight: normal;
 }
+
 #gameBoard {
     display: grid;
     grid-template-columns: repeat(3, 100px);
     grid-template-rows: repeat(3, 100px);
     gap: 5px;
-    margin: 20px auto;
+    margin: 0 auto 30px auto;
 }
+
 .cell {
     width: 100px;
     height: 100px;
-    background-color: white;
-    border: 2px solid #333;
+    background-color: #1f2833;
+    border: 2px solid #45a29e;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 40px;
+    font-size: 50px;
     font-weight: bold;
     cursor: pointer;
+    color: #ffffff;
+    text-shadow: 0 0 5px #ffffff, 0 0 10px #66fcf1;
+    transition: all 0.3s ease;
 }
+
 .cell:hover {
-    background-color: #e2e2e2;
+    background-color: #45a29e;
+    box-shadow: inset 0 0 15px #66fcf1;
 }
+
+/* NEW: The glowing effect for the winning squares */
+.cell.win {
+    background-color: rgba(102, 252, 241, 0.3);
+    box-shadow: inset 0 0 20px #66fcf1, 0 0 15px #66fcf1;
+    border-color: #fff;
+    color: #fff;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #66fcf1;
+}
+
 #restartBtn {
-    padding: 10px 20px;
+    padding: 12px 25px;
+    font-family: 'Orbitron', sans-serif;
     font-size: 16px;
-    background-color: #333;
-    color: white;
-    border: none;
+    font-weight: bold;
+    background-color: transparent;
+    color: #66fcf1;
+    border: 2px solid #66fcf1;
     border-radius: 5px;
     cursor: pointer;
+    text-transform: uppercase;
+    transition: 0.3s;
 }
+
 #restartBtn:hover {
-    background-color: #555;
+    background-color: #66fcf1;
+    color: #0b0c10;
+    box-shadow: 0 0 15px #66fcf1;
 }

@@ -1,16 +1,12 @@
 const cells = document.querySelectorAll(".cell");
 const statusText = document.querySelector("#statusText");
 const restartBtn = document.querySelector("#restartBtn");
-
-// New variables to grab the score elements
 const scoreXText = document.querySelector("#scoreX");
 const scoreOText = document.querySelector("#scoreO");
 
 let board = ["", "", "", "", "", "", "", "", ""];
 let currentPlayer = "X";
 let isGameActive = true;
-
-// New variables to keep track of points
 let scoreX = 0;
 let scoreO = 0;
 
@@ -23,7 +19,7 @@ const winConditions = [
 function initializeGame() {
     cells.forEach(cell => cell.addEventListener("click", cellClicked));
     restartBtn.addEventListener("click", restartGame);
-    statusText.textContent = `Player ${currentPlayer}'s turn`;
+    statusText.textContent = `SYSTEM READY: Player ${currentPlayer}`;
 }
 
 function cellClicked() {
@@ -40,6 +36,8 @@ function updateCell(cell, index) {
 
 function checkWinner() {
     let roundWon = false;
+    let winningCells = []; // Variable to store which boxes won
+
     for (let i = 0; i < winConditions.length; i++) {
         const condition = winConditions[i];
         const cellA = board[condition[0]];
@@ -47,17 +45,23 @@ function checkWinner() {
         const cellC = board[condition[2]];
 
         if (cellA === "" || cellB === "" || cellC === "") continue;
+        
         if (cellA === cellB && cellB === cellC) {
             roundWon = true;
+            winningCells = condition; // Save the winning combination
             break;
         }
     }
 
     if (roundWon) {
-        statusText.textContent = `Player ${currentPlayer} wins!`;
+        statusText.textContent = `VICTORY: Player ${currentPlayer} wins!`;
         isGameActive = false;
         
-        // NEW CODE: Add a point to the winner's score
+        // NEW CODE: Add the 'win' class to make those specific cells light up
+        cells[winningCells[0]].classList.add("win");
+        cells[winningCells[1]].classList.add("win");
+        cells[winningCells[2]].classList.add("win");
+        
         if (currentPlayer === "X") {
             scoreX++;
             scoreXText.textContent = scoreX;
@@ -69,21 +73,26 @@ function checkWinner() {
     }
 
     if (!board.includes("")) {
-        statusText.textContent = "It's a draw!";
+        statusText.textContent = "STALEMATE: Draw detected.";
         isGameActive = false;
         return;
     }
 
     currentPlayer = currentPlayer === "X" ? "O" : "X";
-    statusText.textContent = `Player ${currentPlayer}'s turn`;
+    statusText.textContent = `AWAITING INPUT: Player ${currentPlayer}`;
 }
 
 function restartGame() {
     currentPlayer = "X";
     board = ["", "", "", "", "", "", "", "", ""];
     isGameActive = true;
-    statusText.textContent = `Player ${currentPlayer}'s turn`;
-    cells.forEach(cell => cell.textContent = "");
+    statusText.textContent = `SYSTEM READY: Player ${currentPlayer}`;
+    
+    // NEW CODE: Clear the text AND remove the glowing 'win' class
+    cells.forEach(cell => {
+        cell.textContent = "";
+        cell.classList.remove("win");
+    });
 }
 
 initializeGame();
